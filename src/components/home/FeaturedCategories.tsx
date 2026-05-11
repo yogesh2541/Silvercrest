@@ -7,12 +7,12 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
 const categoryImages: { [key: string]: string } = {
-  'Sofas': 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=800&fit=crop',
-  'Chairs': 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800&h=800&fit=crop',
-  'Beds': 'https://images.unsplash.com/photo-1540932239986-310128078ceb?w=800&h=800&fit=crop',
-  'Dining': 'https://images.unsplash.com/photo-1538182143081-c8c51d4b759f?w=800&h=800&fit=crop',
-  'Wardrobes': 'https://images.unsplash.com/photo-1578500494198-246f612d782d?w=800&h=800&fit=crop',
-  'Office': 'https://images.unsplash.com/photo-1533139502658-0198f920d8db?w=800&h=800&fit=crop',
+  'Sofas': 'https://images.pexels.com/photos/8135260/pexels-photo-8135260.jpeg?w=800&h=800&fit=crop',
+  'Chairs': 'https://images.pexels.com/photos/8135262/pexels-photo-8135262.jpeg?w=800&h=800&fit=crop',
+  'Beds': 'https://images.pexels.com/photos/8135289/pexels-photo-8135289.jpeg?w=800&h=800&fit=crop',
+  'Dining': 'https://images.pexels.com/photos/7195569/pexels-photo-7195569.jpeg?w=800&h=800&fit=crop',
+  'Wardrobes': 'https://images.pexels.com/photos/8135256/pexels-photo-8135256.jpeg?w=800&h=800&fit=crop',
+  'Office': 'https://images.pexels.com/photos/8135273/pexels-photo-8135273.jpeg?w=800&h=800&fit=crop',
 };
 
 export default function FeaturedCategories() {

@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="relative w-full h-screen overflow-hidden">
       {/* Background image */}
       <Image
-        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&h=1080&fit=crop"
+        src="https://images.pexels.com/photos/27535711/pexels-photo-27535711.jpeg?w=1920&h=1080&fit=crop"
         alt="Premium Furniture"
         fill
         className="object-cover"

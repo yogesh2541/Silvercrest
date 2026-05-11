@@ -91,20 +91,6 @@ export default function Footer() {
           <p className="font-light text-xs uppercase tracking-widest" style={{color: '#6B6B6B'}}>
             © 2026 Silvercrest Commerce (OPC) Private Limited. All Rights Reserved.
           </p>
-          <div className="flex gap-8">
-            <a href="#" className="uppercase text-xs tracking-widest font-light transition-colors" 
-               style={{color: '#6B6B6B'}}
-               onMouseEnter={(e) => e.currentTarget.style.color = '#B8925A'}
-               onMouseLeave={(e) => e.currentTarget.style.color = '#6B6B6B'}>Facebook</a>
-            <a href="#" className="uppercase text-xs tracking-widest font-light transition-colors" 
-               style={{color: '#6B6B6B'}}
-               onMouseEnter={(e) => e.currentTarget.style.color = '#B8925A'}
-               onMouseLeave={(e) => e.currentTarget.style.color = '#6B6B6B'}>Instagram</a>
-            <a href="#" className="uppercase text-xs tracking-widest font-light transition-colors" 
-               style={{color: '#6B6B6B'}}
-               onMouseEnter={(e) => e.currentTarget.style.color = '#B8925A'}
-               onMouseLeave={(e) => e.currentTarget.style.color = '#6B6B6B'}>LinkedIn</a>
-          </div>
         </div>
       </div>
     </footer>

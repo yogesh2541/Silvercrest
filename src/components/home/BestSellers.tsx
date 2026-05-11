@@ -23,7 +23,7 @@ export default function BestSellers() {
           {/* Subtle background image accent */}
           <div className="absolute inset-0 opacity-5 -m-20 hidden md:block">
             <Image
-              src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=1200&h=400&fit=crop"
+              src="https://images.pexels.com/photos/8135260/pexels-photo-8135260.jpeg?w=1200&h=400&fit=crop"
               alt="Background"
               fill
               className="object-cover"
