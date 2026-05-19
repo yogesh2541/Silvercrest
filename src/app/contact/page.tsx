@@ -12,9 +12,9 @@ const COMPANY_INFO = {
   pan: 'ABTCS3743F',
   director: 'Abdul Rasid',
   address: 'C/O Manak Coworking Space, 2nd Floor, Opp. New Power House, New Power House Road, Jodhpur, Rajasthan - 342001, India',
-  email: 'support@silvercrest.com',
-  phone: '[+91-XXXX-XXXX-XXX]',
-  whatsapp: '[+91-XXXX-XXXX-XXX]',
+  email: 'info@silvercrestcommerce.com',
+  phone: '+91 93581 43890',
+  whatsapp: '+91 93581 43890',
   businessHours: {
     days: 'Monday – Saturday',
     time: '10:00 AM – 6:00 PM IST'

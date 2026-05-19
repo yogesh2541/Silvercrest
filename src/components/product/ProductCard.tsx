@@ -49,6 +49,15 @@ export default function ProductCard({ product }: ProductCardProps) {
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
+          {product.imageBadges && product.imageBadges.length > 0 && (
+            <div className="absolute top-6 left-6 flex flex-col gap-2">
+              {product.imageBadges.map((b) => (
+                <span key={b} className="text-xs px-3 py-1 rounded-full font-semibold" style={{background: 'rgba(0,0,0,0.6)', color: '#fff'}}>
+                  {b}
+                </span>
+              ))}
+            </div>
+          )}
           {product.featured && (
             <div className="absolute top-6 right-6 px-4 py-2 text-xs uppercase tracking-widest font-semibold" 
                  style={{
@@ -104,6 +113,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="flex items-center gap-2 text-xs mb-6" style={{color: '#6B6B6B'}}>
               <span>📦 Ships in {product.deliveryTime}</span>
             </div>
+              {/* Product tags removed from card (kept on detail page only) */}
           </div>
 
           {/* Price & Actions */}

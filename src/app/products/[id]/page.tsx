@@ -65,6 +65,15 @@ export default function ProductDetailPage() {
                 fill
                 className="object-cover"
               />
+              {product.imageBadges && product.imageBadges.length > 0 && (
+                <div className="absolute top-6 left-6 flex flex-col gap-2">
+                  {product.imageBadges.map((b) => (
+                    <span key={b} className="text-xs px-3 py-1 rounded-full font-semibold" style={{background: 'rgba(0,0,0,0.6)', color: '#fff'}}>
+                      {b}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -75,6 +84,15 @@ export default function ProductDetailPage() {
                   <span className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     {product.category}
                   </span>
+                    {product.tags && product.tags.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        {product.tags.map((tag) => (
+                          <span key={tag} className="text-xs px-3 py-1 rounded-full border" style={{borderColor: '#E7DFD4', color: '#6B6B6B'}}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   {product.featured && (
                     <span className="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
                       Featured

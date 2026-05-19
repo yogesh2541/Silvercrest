@@ -11,19 +11,22 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import ProductCard from '@/components/product/ProductCard';
-import { products, categories } from '@/data/products';
+import { products } from '@/data/products';
 import { useState, useMemo } from 'react';
 
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTag, setSelectedTag] = useState<string>('All');
   const [sortBy, setSortBy] = useState('featured');
+
+  const tags = Array.from(new Set(products.flatMap((p) => p.tags || [])));
+
 
   const filteredProducts = useMemo(() => {
     let filtered = products;
 
-    if (selectedCategory !== 'All') {
-      filtered = filtered.filter((p) => p.category === selectedCategory);
+    if (selectedTag !== 'All') {
+      filtered = filtered.filter((p) => (p.tags || []).includes(selectedTag));
     }
 
     if (searchTerm) {
@@ -42,8 +45,10 @@ export default function ProductsPage() {
       filtered = [...filtered].sort((a, b) => b.rating - a.rating);
     }
 
+    // price filter removed — only Tag, Search, and Sort remain
+
     return filtered;
-  }, [selectedCategory, searchTerm, sortBy]);
+  }, [selectedTag, searchTerm, sortBy]);
 
   return (
     <div className="min-h-screen py-12 px-4 bg-white dark:bg-slate-950">
@@ -65,19 +70,21 @@ export default function ProductsPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 dark:bg-slate-800 dark:border-slate-700"
             />
-            <Select value={selectedCategory} onValueChange={(value) => setSelectedCategory(value || 'All')}>
+            {/* Category filter removed - keeping Tag, Search, and Sort */}
+            <Select value={selectedTag} onValueChange={(value) => setSelectedTag(value || 'All')}>
               <SelectTrigger className="w-full md:w-48 dark:bg-slate-800 dark:border-slate-700">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="dark:bg-slate-800 dark:border-slate-700">
-                <SelectItem value="All">All Categories</SelectItem>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {cat}
+                <SelectItem value="All">All Tags</SelectItem>
+                {tags.map((tag) => (
+                  <SelectItem key={tag} value={tag}>
+                    {tag}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
+            {/* Price range filter removed */}
             <Select value={sortBy} onValueChange={(value) => setSortBy(value || 'featured')}>
               <SelectTrigger className="w-full md:w-48 dark:bg-slate-800 dark:border-slate-700">
                 <SelectValue />

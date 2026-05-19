@@ -77,8 +77,8 @@ export default function Footer() {
           <div>
             <h4 className="font-light mb-8 uppercase text-xs tracking-widest" style={{color: '#B8925A'}}>Contact</h4>
             <ul className="space-y-3 text-sm font-light" style={{color: '#6B6B6B'}}>
-              <li className="flex items-center gap-3"><Mail size={14} style={{color: '#B8925A'}} /> support@silvercrest.com</li>
-              <li className="flex items-center gap-3"><Phone size={14} style={{color: '#B8925A'}} /> [+91-XXXX-XXXX-XXX]</li>
+              <li className="flex items-center gap-3"><Mail size={14} style={{color: '#B8925A'}} /> info@silvercrestcommerce.com</li>
+              <li className="flex items-center gap-3"><Phone size={14} style={{color: '#B8925A'}} /> +91 93581 43890</li>
               <li className="flex items-start gap-3"><MapPin size={14} style={{color: '#B8925A', marginTop: '2px'}} />
                 <span>C/O Manak Coworking Space, Jodhpur, Rajasthan - 342001, India</span>
               </li>

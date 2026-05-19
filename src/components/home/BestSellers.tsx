@@ -8,7 +8,9 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 export default function BestSellers() {
-  const bestSellers = products.filter((p) => p.featured).slice(0, 4);
+  const featuredProducts = products.filter((p) => p.featured);
+  const bestSellers = (featuredProducts.length > 0 ? featuredProducts : products)
+    .slice(0, 4);
 
   return (
     <section className="py-32 px-4" style={{backgroundColor: '#F8F5F0'}}>

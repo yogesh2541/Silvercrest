@@ -4,6 +4,8 @@ export interface Product {
   price: number;
   image: string;
   category: 'Sofas' | 'Chairs' | 'Beds' | 'Dining' | 'Wardrobes' | 'Office' | 'Decor';
+  tags?: string[];
+  imageBadges?: string[];
   description: string;
   deliveryTime: string;
   rating: number;

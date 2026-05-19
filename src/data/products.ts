@@ -1,266 +1,117 @@
 import { Product } from '@/types/product';
+import rawProducts from '../../products.json';
 
-export const products: Product[] = [
-  {
-    id: '1',
-    name: 'Modern Sectional Sofa',
-    price: 1299,
-    image: 'https://images.pexels.com/photos/8135260/pexels-photo-8135260.jpeg?w=600&h=600&fit=crop',
-    category: 'Sofas',
-    description: 'Sleek modern sectional with premium fabric and ergonomic design.',
-    deliveryTime: '5-7 days',
-    rating: 4.8,
-    reviews: 124,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '2',
-    name: 'Minimalist Lounge Chair',
-    price: 599,
-    image: 'https://images.pexels.com/photos/8135262/pexels-photo-8135262.jpeg?w=600&h=600&fit=crop',
-    category: 'Chairs',
-    description: 'Comfortable lounge chair with clean lines and neutral upholstery.',
-    deliveryTime: '3-5 days',
-    rating: 4.6,
-    reviews: 87,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '3',
-    name: 'Luxury Platform Bed',
-    price: 1899,
-    image: 'https://images.pexels.com/photos/8135289/pexels-photo-8135289.jpeg?w=600&h=600&fit=crop',
-    category: 'Beds',
-    description: 'Premium platform bed with adjustable headrest and luxury mattress.',
-    deliveryTime: '7-10 days',
-    rating: 4.9,
-    reviews: 156,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '4',
-    name: 'Marble Dining Table',
-    price: 2499,
-    image: 'https://images.pexels.com/photos/7195569/pexels-photo-7195569.jpeg?w=600&h=600&fit=crop',
-    category: 'Dining',
-    description: 'Elegant marble dining table with metal legs, seats 8 people.',
-    deliveryTime: '10-14 days',
-    rating: 4.7,
-    reviews: 98,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '5',
-    name: 'Oak Wood Wardrobe',
-    price: 1799,
-    image: 'https://images.pexels.com/photos/8135256/pexels-photo-8135256.jpeg?w=600&h=600&fit=crop',
-    category: 'Wardrobes',
-    description: 'Spacious oak wood wardrobe with sliding doors and interior shelving.',
-    deliveryTime: '8-12 days',
-    rating: 4.5,
-    reviews: 67,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '6',
-    name: 'Executive Office Desk',
-    price: 899,
-    image: 'https://images.pexels.com/photos/8135273/pexels-photo-8135273.jpeg?w=600&h=600&fit=crop',
-    category: 'Office',
-    description: 'Spacious office desk with cable management and storage drawers.',
-    deliveryTime: '5-7 days',
-    rating: 4.4,
-    reviews: 56,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '7',
-    name: 'Geometric Wall Shelf',
-    price: 249,
-    image: 'https://images.pexels.com/photos/16476339/pexels-photo-16476339.jpeg?w=600&h=600&fit=crop',
-    category: 'Decor',
-    description: 'Modern geometric wall shelf for books and decorative items.',
-    deliveryTime: '2-3 days',
-    rating: 4.6,
-    reviews: 45,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '8',
-    name: 'Premium Office Chair',
-    price: 749,
-    image: 'https://images.pexels.com/photos/20718124/pexels-photo-20718124.jpeg?w=600&h=600&fit=crop',
-    category: 'Chairs',
-    description: 'Ergonomic office chair with lumbar support and adjustable armrests.',
-    deliveryTime: '4-6 days',
-    rating: 4.7,
-    reviews: 112,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '9',
-    name: 'Tufted Queen Bed',
-    price: 1499,
-    image: 'https://images.pexels.com/photos/34506212/pexels-photo-34506212.jpeg?w=600&h=600&fit=crop',
-    category: 'Beds',
-    description: 'Queen-sized bed with tufted headboard and storage base.',
-    deliveryTime: '6-8 days',
-    rating: 4.8,
-    reviews: 134,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '10',
-    name: 'L-Shaped Sectional',
-    price: 1699,
-    image: 'https://images.pexels.com/photos/13764313/pexels-photo-13764313.jpeg?w=600&h=600&fit=crop',
-    category: 'Sofas',
-    description: 'Spacious L-shaped sectional perfect for large living rooms.',
-    deliveryTime: '7-10 days',
-    rating: 4.6,
-    reviews: 98,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '11',
-    name: 'Industrial Dining Chairs',
-    price: 399,
-    image: 'https://images.pexels.com/photos/8135262/pexels-photo-8135262.jpeg?w=600&h=600&fit=crop',
-    category: 'Chairs',
-    description: 'Set of 4 industrial dining chairs with metal frames.',
+type ShopifyProductRow = {
+  Handle: string;
+  Title: string;
+  'Body (HTML)'?: string;
+  'Product Category'?: string;
+  Tags?: string;
+  'Variant Price'?: string;
+  'Variant Compare At Price'?: string;
+  'Image Src'?: string;
+  'Image Position'?: string;
+  [key: string]: unknown;
+};
+
+const shopifyData = rawProducts as ShopifyProductRow[];
+
+const sanitizeText = (value: unknown) => {
+  const text = String(value ?? '').trim();
+  return text.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+};
+
+const normalizeCategory = (value: string): Product['category'] => {
+  const raw = value.toLowerCase();
+
+  if (raw.includes('sofa')) return 'Sofas';
+  if (raw.includes('chair')) return 'Chairs';
+  if (raw.includes('bed')) return 'Beds';
+  if (raw.includes('table') || raw.includes('dining')) return 'Dining';
+  if (raw.includes('wardrobe') || raw.includes('cabinet')) return 'Wardrobes';
+  if (raw.includes('office')) return 'Office';
+  return 'Decor';
+};
+
+const deterministicNumber = (seed: string, min: number, max: number) => {
+  const s = String(seed || '');
+  const hash = Array.from(s).reduce((acc, ch) => acc * 31 + ch.charCodeAt(0), 7);
+  const range = Math.max(1, max - min + 1);
+  return min + (Math.abs(hash) % range);
+};
+
+const groupedProducts = shopifyData.reduce((acc, row) => {
+  const handle = String(row.Handle || '').trim();
+  if (!handle) return acc;
+
+  const existing = acc.get(handle) ?? [];
+  existing.push(row);
+  acc.set(handle, existing);
+  return acc;
+}, new Map<string, ShopifyProductRow[]>());
+
+export const products: Product[] = Array.from(groupedProducts.values()).map((rows) => {
+  const sortedRows = rows.slice().sort((a, b) => {
+    const left = Number(a['Image Position'] || '0');
+    const right = Number(b['Image Position'] || '0');
+    return left - right;
+  });
+
+  const primary = sortedRows.find((row) => String(row.Title || '').trim()) ?? sortedRows[0];
+  const imageRow = sortedRows.find((row) => String(row['Image Src'] || '').trim()) ?? primary;
+
+  const price = Number(String(primary['Variant Price'] || primary['Variant Compare At Price'] || '0')) || 0;
+  const categoryValue = String(primary['Product Category'] || primary.Tags || '');
+  const tagsValue = String(primary.Tags || '');
+  const tags = tagsValue
+    .split(',')
+    .map((t) => sanitizeText(t))
+    .filter((t) => t.length > 0);
+
+  // Stable fallback tags when Shopify row has no tags
+  const fallbackTags = ['Curated', 'Artisans', 'Handmade', 'Limited', 'Bestseller', 'New Arrival'];
+  const pickFallbackTags = (seed: string) => {
+    // simple deterministic selection based on seed
+    const hash = Math.abs(Array.from(seed).reduce((acc, ch) => acc * 31 + ch.charCodeAt(0), 0));
+    const count = 1 + (hash % 2); // pick 1 or 2 tags
+    const out = new Set<string>();
+    for (let i = 0; out.size < count; i++) {
+      out.add(fallbackTags[(hash + i) % fallbackTags.length]);
+    }
+    return Array.from(out);
+  };
+
+  const finalTags = tags.length > 0 ? Array.from(new Set(tags)) : pickFallbackTags(String(primary.Handle || primary.Title || ''));
+
+  // Manual image badge assignment for a few selected products only
+  const handleKey = String(primary.Handle || '').trim();
+  const manualImageBadges: Record<string, string[]> = {
+    'the-neytiri-dining-table': ['Curated'],
+    'the-furiosa-dining-table': ['Artisans Made'],
+    'the-imperator-dining-table': ['Curated'],
+    'odyssey-dining-table': ['Artisans Made'],
+    'vista-dining-table': ['Curated'],
+  };
+
+  const imageBadges = manualImageBadges[handleKey] ?? [];
+
+  const reviewCount = deterministicNumber(String(primary.Handle || primary.Title || ''), 5, 300);
+
+  return {
+    id: String(primary.Handle || '').trim() || `${sanitizeText(primary.Title).toLowerCase().replace(/\s+/g, '-')}`,
+    name: sanitizeText(primary.Title) || sanitizeText(primary.Handle),
+    price,
+    image: String(imageRow['Image Src'] || '').trim(),
+    category: normalizeCategory(categoryValue),
+      tags: finalTags,
+      imageBadges,
+    description: sanitizeText(primary['Body (HTML)']) || sanitizeText(primary.Title),
     deliveryTime: '5-7 days',
     rating: 4.5,
-    reviews: 73,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '12',
-    name: 'Walnut Storage Cabinet',
-    price: 1099,
-    image: 'https://images.pexels.com/photos/16476339/pexels-photo-16476339.jpeg?w=600&h=600&fit=crop',
-    category: 'Wardrobes',
-    description: 'Modern walnut storage cabinet with glass doors.',
-    deliveryTime: '6-8 days',
-    rating: 4.4,
-    reviews: 51,
+    reviews: reviewCount,
     featured: false,
     inStock: true,
-  },
-  {
-    id: '13',
-    name: 'Studio Work Desk',
-    price: 799,
-    image: 'https://images.pexels.com/photos/8135273/pexels-photo-8135273.jpeg?w=600&h=600&fit=crop',
-    category: 'Office',
-    description: 'Compact studio desk ideal for small spaces and creative work.',
-    deliveryTime: '4-5 days',
-    rating: 4.3,
-    reviews: 42,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '14',
-    name: 'Wall-Mounted Desk',
-    price: 599,
-    image: 'https://images.pexels.com/photos/8135273/pexels-photo-8135273.jpeg?w=600&h=600&fit=crop',
-    category: 'Office',
-    description: 'Space-saving wall-mounted desk with sturdy bracket system.',
-    deliveryTime: '3-4 days',
-    rating: 4.5,
-    reviews: 67,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '15',
-    name: 'Pendant Light Fixture',
-    price: 189,
-    image: 'https://images.pexels.com/photos/16476339/pexels-photo-16476339.jpeg?w=600&h=600&fit=crop',
-    category: 'Decor',
-    description: 'Modern pendant light with adjustable height and warm lighting.',
-    deliveryTime: '2-3 days',
-    rating: 4.7,
-    reviews: 89,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '16',
-    name: 'Accent Armchair',
-    price: 699,
-    image: 'https://images.pexels.com/photos/20718124/pexels-photo-20718124.jpeg?w=600&h=600&fit=crop',
-    category: 'Chairs',
-    description: 'Beautiful accent armchair with velvet upholstery.',
-    deliveryTime: '4-6 days',
-    rating: 4.8,
-    reviews: 103,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '17',
-    name: 'King-Size Bed Frame',
-    price: 1999,
-    image: 'https://images.pexels.com/photos/8135289/pexels-photo-8135289.jpeg?w=600&h=600&fit=crop',
-    category: 'Beds',
-    description: 'Premium king-size bed frame with luxury headboard.',
-    deliveryTime: '8-10 days',
-    rating: 4.9,
-    reviews: 167,
-    featured: true,
-    inStock: true,
-  },
-  {
-    id: '18',
-    name: 'Glass Coffee Table',
-    price: 499,
-    image: 'https://images.pexels.com/photos/7195569/pexels-photo-7195569.jpeg?w=600&h=600&fit=crop',
-    category: 'Decor',
-    description: 'Minimalist glass coffee table with metal base.',
-    deliveryTime: '3-5 days',
-    rating: 4.6,
-    reviews: 76,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '19',
-    name: 'Console Table',
-    price: 449,
-    image: 'https://images.pexels.com/photos/7195569/pexels-photo-7195569.jpeg?w=600&h=600&fit=crop',
-    category: 'Dining',
-    description: 'Elegant console table suitable for entryways and hallways.',
-    deliveryTime: '4-6 days',
-    rating: 4.5,
-    reviews: 58,
-    featured: false,
-    inStock: true,
-  },
-  {
-    id: '20',
-    name: 'Bookshelf Unit',
-    price: 699,
-    image: 'https://images.pexels.com/photos/8135256/pexels-photo-8135256.jpeg?w=600&h=600&fit=crop',
-    category: 'Decor',
-    description: '5-tier bookshelf with adjustable shelves and metal frame.',
-    deliveryTime: '5-7 days',
-    rating: 4.6,
-    reviews: 92,
-    featured: false,
-    inStock: true,
-  },
-];
+  };
+});
 
 export const categories = ['Sofas', 'Chairs', 'Beds', 'Dining', 'Wardrobes', 'Office', 'Decor'];

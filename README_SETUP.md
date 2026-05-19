@@ -323,8 +323,8 @@ This project is provided as-is for commercial use.
 ## 🆘 Support
 
 For issues or questions:
-- Email: support@silvercrest.com
-- Phone: +1 (555) 123-4567
+- Email: info@silvercrestcommerce.com
+- Phone: +91 93581 43890
 - Website: https://silvercrest.com
 
 ---
