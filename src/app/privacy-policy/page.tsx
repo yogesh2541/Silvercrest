@@ -184,7 +184,7 @@ export default function PrivacyPolicyPage() {
               For questions about this policy or our practices, contact:<br /><br />
               <strong style={{color: '#B8925A'}}>Data Protection Contact</strong><br />
               Email: info@silvercrestcommerce.com<br />
-              Phone: +91 93581 43890
+              Phone: +91 89558 35661
             </p>
           </section>
 
@@ -325,7 +325,7 @@ export default function PrivacyPolicyPage() {
 
               <strong style={{color: '#B8925A'}}>Silvercrest Commerce (OPC) Private Limited</strong><br />
               Email: info@silvercrestcommerce.com<br />
-              Phone: +91 93581 43890<br />
+              Phone: +91 89558 35661<br />
               Address: C/O Manak Coworking Space, 2nd Floor, Opp. New Power House, New Power House Road, Jodhpur, Rajasthan - 342001, India
             </p>
           </section>

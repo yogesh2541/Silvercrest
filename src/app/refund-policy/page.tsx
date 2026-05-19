@@ -277,7 +277,7 @@ export default function RefundPolicyPage() {
               For refund-related inquiries, contact:<br /><br />
               <strong style={{color: '#B8925A'}}>Silvercrest Commerce Support</strong><br />
                 Email: info@silvercrestcommerce.com<br />
-                Phone: +91 93581 43890<br />
+                Phone: +91 89558 35661<br />
               Business Hours: Monday – Saturday, 10:00 AM – 6:00 PM IST
             </p>
           </section>
